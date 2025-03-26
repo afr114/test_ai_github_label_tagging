@@ -4,6 +4,11 @@ on:
   pull_request:
     types: [opened, edited, reopened, synchronize]
 
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 jobs:
   label-ai-pr:
     runs-on: ubuntu-latest
@@ -17,9 +22,15 @@ jobs:
             const body = pr.body || "";
             const number = pr.number;
 
-            const hasLight = body.includes("- [x] **Light**");
-            const hasMedium = body.includes("- [x] **Medium**");
-            const hasHeavy = body.includes("- [x] **Heavy**");
+            // Match checkboxes like [x], [X], [ x ], [ X ] etc. case- and space-insensitive
+            const checked = (label) => {
+              const pattern = new RegExp(`- \\[\\s*[xX]\\s*\\] \\*\\*${label}\\*\\*`);
+              return pattern.test(body);
+            };
+
+            const hasLight = checked("Light");
+            const hasMedium = checked("Medium");
+            const hasHeavy = checked("Heavy");
 
             let labelToAdd = null;
 
@@ -42,3 +53,4 @@ jobs:
                 });
               }
             }
+
