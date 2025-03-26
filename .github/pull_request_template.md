@@ -3,6 +3,9 @@
 Select the most relevant level of GenAI assistance used in this PR.  
 (Required if this PR involved tools like GitHub Copilot, ChatGPT, etc.)
 
+> To select a level, **manually type an `x` inside one of the checkboxes below**, like this: `[x]` or `[ X]` or `[X]` or `[ X ]` or `[x ]` or `[X ]`.  
+> These checkboxes are not interactive — you must edit the markdown in the PR description manually.
+
 ---
 
 - [ ] **Light** — “I knew what I wanted, AI just filled it in.”
